@@ -13,17 +13,6 @@ public class GameMap {
     private TextureRegion grassTexture;
 
 
-    public int getCellsX() {
-        return CELLS_X;
-    }
-
-    public int getCellsY() {
-        return CELLS_Y;
-    }
-
-    public int getSIZE() {
-        return SIZE;
-    }
 
     public GameMap(TextureAtlas atlas) {
         this.data = new byte[CELLS_X][CELLS_Y];

@@ -16,7 +16,7 @@ public class Hero {
     private TextureRegion texture;
     private Vector2 velocity;
     private float indent;
-    private DungeonGame game;
+    private boolean isActive;
 
     public Hero(TextureAtlas atlas, ProjectileController projectileController) {
         this.position = new Vector2(100, 100);
@@ -24,14 +24,38 @@ public class Hero {
         this.projectileController = projectileController;
         this.velocity = new Vector2(300, 300);
         this.indent = 20;
+        this.isActive = false;
     }
+
     public void update(float dt) {
         move(dt);
         checkBounds();
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
+            switchMode();
+        }
+
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && isActive == true){
+            projectileController.activate(position.x, position.y, 200, 40);
+            projectileController.activate(position.x, position.y, 200, 0);
+        }
+
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && isActive == false) {
             projectileController.activate(position.x, position.y, 200, 0);
         }
     }
+
+    private boolean switchMode(){
+        if (isActive == false) {
+            isActive = true;
+        } else if (isActive == true) {
+            isActive = false;
+        }
+        return isActive;
+    }
+
 
 
     private void move(float dt){
